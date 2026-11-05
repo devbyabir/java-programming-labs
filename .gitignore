@@ -1,0 +1,9 @@
+*.class
+build/
+out/
+*.iml
+.idea/
+.vscode/
+__pycache__/
+.DS_Store
+Thumbs.db
