@@ -125,6 +125,11 @@ public class Check {
         sample = Path(self.temp.name) / "score.txt"
         sample.write_text("Name: Test,English: 0,Math: 100\n")
         self.assertIn("Average = 50.00", self.run_java(key, "ReadScores", "demo123\n", [sample]))
+        sample.write_text("Name: Test, English: 75, Math: 86\n")
+        self.assertIn("Average = 80.50", self.run_java(key, "ReadScores", "demo123\n", [sample]))
+        # A file saved as "UTF-8 with BOM" must still read its first record.
+        sample.write_text("Name: Test, English: 80, Math: 90\n", encoding="utf-8-sig")
+        self.assertIn("Test: English = 80", self.run_java(key, "ReadScores", "demo123\n", [sample]))
         for line in ("broken", "Name: Test, English: 101, Math: 50", "Name: Test, English: abc, Math: 50"):
             sample.write_text(line)
             self.run_java(key, "ReadScores", "demo123\n", [sample], False)

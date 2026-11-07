@@ -30,12 +30,12 @@ class Cylinder implements C {
 
     @Override
     public double area() {
-        return 2 * P * radius * (radius + height); // Surface Area = 2Ï€r(r + h)
+        return 2 * P * radius * (radius + height); // Surface Area = 2πr(r + h)
     }
 
     @Override
     public double volume() {
-        return P * radius * radius * height; // Volume = Ï€rÂ²h
+        return P * radius * radius * height; // Volume = πr²h
     }
 
     @Override
