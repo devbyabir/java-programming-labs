@@ -72,10 +72,13 @@ triggered by the push of 5999b6d on 5 November 2026 succeeded. The `test (17)`,
 `test (21)` and `test (25)` jobs each compiled all exercises and passed the
 suite on Temurin JDK 17, 21 and 25. This result covers the code as of 5999b6d only.
 
-**Final-review changes.** No JDK was available on the review machine, so the
-score-reader fix, the cylinder comment change and the new test cases have not
-been compiled or run yet. GitHub Actions will verify them on JDK 17, 21 and 25
-once they are pushed.
+**Final-review changes, commit 083a740.** No JDK was available on the review
+machine, so the score-reader fix, the cylinder comment change and the new test
+cases were not compiled or run locally. The
+[GitHub Actions run](https://github.com/devbyabir/java-programming-labs/actions/runs/42389507926)
+triggered by the push of 083a740 succeeded: the `test (17)`, `test (21)` and
+`test (25)` jobs each compiled all exercises and passed the full suite,
+including the new cases, on Temurin JDK 17, 21 and 25.
 
 Tests cover the stated exercise behavior; they do not establish correctness for
 every possible input or floating-point value.
