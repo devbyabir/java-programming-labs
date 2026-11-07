@@ -36,7 +36,7 @@ public class ReadScores {
             while ((line = reader.readLine()) != null) {
                 lineNumber++;
                 // Final review (2026-11): ignore a UTF-8 byte order mark, e.g. from Notepad.
-                if (lineNumber == 1 && line.startsWith("﻿")) line = line.substring(1);
+                if (lineNumber == 1 && line.startsWith("\uFEFF")) line = line.substring(1);
                 if (line.isBlank()) continue;
                 try {
                     String[] fields = line.split(",", -1);
