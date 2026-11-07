@@ -12,16 +12,17 @@ The final Office Supply Management project is separate from this repository.
 
 | Coursework | Folder | Programs |
 | --- | --- | --- |
-| First assignment | `assignment01-hello-java` | Hello Java |
-| Lab 1 | `lab01-arrays-and-input` | 2D array; number guessing game |
-| Lab 2 | `lab02-numbers-and-classes` | Perfect numbers; Circle and ShapeTester |
-| Lab 3 | `lab03-encapsulation-and-static` | Employee; shared family name |
-| Lab 4 | `lab04-inheritance-and-polymorphism` | Inheritance; insurance premium polymorphism |
-| Second assignment | `assignment02-interfaces` | Shape interface; cylinder with multiple interfaces |
-| Third assignment | `assignment03-file-io` | FileWriter comparison; read student scores |
+| First assignment | [`assignment01-hello-java`](assignment01-hello-java/) | Hello Java |
+| Lab 1 | [`lab01-arrays-and-input`](lab01-arrays-and-input/) | 2D array; number guessing game |
+| Lab 2 | [`lab02-numbers-and-classes`](lab02-numbers-and-classes/) | Perfect numbers; Circle and ShapeTester |
+| Lab 3 | [`lab03-encapsulation-and-static`](lab03-encapsulation-and-static/) | Employee; shared family name |
+| Lab 4 | [`lab04-inheritance-and-polymorphism`](lab04-inheritance-and-polymorphism/) | Inheritance; insurance premium polymorphism |
+| Second assignment | [`assignment02-interfaces`](assignment02-interfaces/) | Shape interface; cylinder with multiple interfaces |
+| Third assignment | [`assignment03-file-io`](assignment03-file-io/) | FileWriter comparison; read student scores |
 
-There are 13 independent exercises. Compile one exercise folder at a time:
-several exercises intentionally reuse class names such as `Main` and `Employee`.
+There are 13 independent exercises, all written in Java. Compile one exercise
+folder at a time: several exercises intentionally reuse class names such as
+`Main` and `Employee`.
 
 ## Compile and run
 
@@ -34,8 +35,9 @@ javac -encoding UTF-8 -Xlint:all -Werror -d build/circle lab02-numbers-and-class
 java -cp build/circle ShapeTester
 ```
 
-On Linux/macOS, replace the first line with `mkdir -p build/circle`.
-Use a separate output directory for each exercise to avoid class-name conflicts.
+On Linux/macOS, replace the `New-Item` line with `mkdir -p build/circle`; the
+`javac` and `java` lines are the same. Use a separate output directory for each
+exercise to avoid class-name conflicts.
 
 The guessing game chooses a number from 1 to 100, handles invalid guesses and
 exits when input ends. The array example contains fixed values, not random data.
@@ -46,7 +48,9 @@ manager salary field required by its assignment.
 
 ## File I/O exercises
 
-Run these commands from the repository root:
+Run these commands from the repository root, because both programs use paths
+relative to the working directory (on Linux/macOS, use
+`mkdir -p build/writers build/scores` for the first line):
 
 ```powershell
 New-Item -ItemType Directory -Force build/writers,build/scores | Out-Null
@@ -72,7 +76,8 @@ Name: Alex, English: 80, Math: 90
 ```
 
 Scores must be integers from 0 to 100; names must be nonempty and cannot contain
-commas. Blank lines are ignored. A malformed record or missing file reports an
+commas. Averages keep their fractional part, for example `80.50`. The file is read
+as UTF-8, with or without a byte order mark. Blank lines are ignored. A malformed record or missing file reports an
 error and exits unsuccessfully. Scores are processed in order, so earlier valid
 records may already have been printed when a later record fails.
 
@@ -82,7 +87,9 @@ Geometry results use ordinary floating-point arithmetic, with its range and prec
 
 ## Tests
 
-With JDK tools on PATH and Python 3 installed:
+The exercises are Java only. Python 3 is used solely by `tests/test_labs.py`,
+which compiles and runs the Java programs for the automated checks. With JDK
+tools on PATH and Python 3 installed:
 
 ```powershell
 python tests/test_labs.py
@@ -90,9 +97,12 @@ python tests/test_labs.py
 
 The suite compiles all exercises independently with `-Xlint:all -Werror`, then
 checks sample outputs, EOF/invalid guesses, perfect-number boundaries, circle
-validation, premium dispatch, writer file contents and malformed score records.
-Tests build into a temporary directory. `JAVA` and `JAVAC` environment variables
-can select tool executables. GitHub Actions is configured for JDK 17, 21 and 25.
+validation, premium dispatch, writer file contents, fractional averages and
+malformed score records. Tests build into a temporary directory and write the
+writer-comparison output there too. `JAVA` and `JAVAC` environment variables
+can select tool executables.
 
-Local verification: all 13 exercises compiled and all seven test groups passed
-on Temurin JDK 21.0.13 on Windows. Other JDK versions await CI verification.
+GitHub Actions runs the suite on Temurin JDK 17, 21 and 25. The
+[baseline run for commit 5999b6d](https://github.com/devbyabir/java-programming-labs/actions/runs/42003459750)
+passed on all three. Later changes and their own verification status are listed in
+[REVIEW_NOTES.md](REVIEW_NOTES.md#verification).
