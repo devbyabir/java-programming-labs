@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ReadScores {
@@ -46,7 +47,7 @@ public class ReadScores {
                         throw new IllegalArgumentException("Missing name");
                     int english = score(fields[1], "English");
                     int math = score(fields[2], "Math");
-                    System.out.printf("%s: English = %d, Math = %d, Average = %.2f%n",
+                    System.out.printf(Locale.ROOT, "%s: English = %d, Math = %d, Average = %.2f%n",
                                       name[1].trim(), english, math, (english + math) / 2.0);
                 } catch (IllegalArgumentException exception) {
                     throw new IOException("Invalid score record at line " + lineNumber, exception);
