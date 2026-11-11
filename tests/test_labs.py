@@ -26,8 +26,8 @@ class Labs(unittest.TestCase):
     def tearDownClass(cls):
         cls.temp.cleanup()
 
-    def run_java(self, key, main, data="", args=(), success=True):
-        result = subprocess.run([JAVA, "-Duser.language=en", "-Duser.country=US", "-cp",
+    def run_java(self, key, main, data="", args=(), success=True, locale=("en", "US")):
+        result = subprocess.run([JAVA, f"-Duser.language={locale[0]}", f"-Duser.country={locale[1]}", "-cp",
                                  str(self.builds[key]), main, *map(str, args)], input=data,
                                 capture_output=True, text=True, timeout=20, cwd=ROOT)
         self.assertEqual(result.returncode == 0, success, result.stdout + result.stderr)
@@ -127,6 +127,8 @@ public class Check {
         self.assertIn("Average = 50.00", self.run_java(key, "ReadScores", "demo123\n", [sample]))
         sample.write_text("Name: Test, English: 75, Math: 86\n")
         self.assertIn("Average = 80.50", self.run_java(key, "ReadScores", "demo123\n", [sample]))
+        self.assertIn("Average = 80.50", self.run_java(
+            key, "ReadScores", "demo123\n", [sample], locale=("de", "DE")))
         # A file saved as "UTF-8 with BOM" must still read its first record.
         sample.write_text("Name: Test, English: 80, Math: 90\n", encoding="utf-8-sig")
         self.assertIn("Test: English = 80", self.run_java(key, "ReadScores", "demo123\n", [sample]))

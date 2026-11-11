@@ -76,10 +76,12 @@ Name: Alex, English: 80, Math: 90
 ```
 
 Scores must be integers from 0 to 100; names must be nonempty and cannot contain
-commas. Averages keep their fractional part, for example `80.50`. The file is read
-as UTF-8, with or without a byte order mark. Blank lines are ignored. A malformed record or missing file reports an
-error and exits unsuccessfully. Scores are processed in order, so earlier valid
-records may already have been printed when a later record fails.
+commas. Averages keep their fractional part, for example `80.50`, and use a
+decimal point regardless of the system locale. The file is read as UTF-8, with
+or without a byte order mark. Blank lines are ignored. A malformed record or
+missing file reports an error and exits unsuccessfully. Scores are processed in
+order, so earlier valid records may already have been printed when a later record
+fails.
 
 Circle, rectangle and cylinder dimensions must be non-negative; floating-point
 dimensions must also be finite. The cylinder retains the assignment's `P = 3.14`.
